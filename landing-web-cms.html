@@ -1,0 +1,2129 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web + CMS — Tu Sitio Web Profesional con Panel de Gestión</title>
+  <meta name="description" content="Obtén un sitio web profesional con panel de administración incluido. Diseño moderno, rendimiento optimizado y control total de tu contenido.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════ */
+    :root {
+      --color-bg: #0A0A0F;
+      --color-bg-card: #12121A;
+      --color-bg-card-hover: #1A1A25;
+      --color-surface: #16161F;
+      --color-border: rgba(255,255,255,0.06);
+      --color-border-hover: rgba(255,255,255,0.12);
+      --color-text: #F0F0F5;
+      --color-text-secondary: #9494A8;
+      --color-text-muted: #6B6B80;
+      --color-accent: #6C5CE7;
+      --color-accent-light: #A29BFE;
+      --color-accent-glow: rgba(108,92,231,0.25);
+      --color-green: #00D2A0;
+      --color-green-glow: rgba(0,210,160,0.15);
+      --color-whatsapp: #25D366;
+      --color-whatsapp-hover: #1EBE5A;
+
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-full: 9999px;
+
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+    }
+
+    /* ═══════════════════════════════════════
+       LIGHT MODE TOKENS
+    ═══════════════════════════════════════ */
+    [data-theme="light"] {
+      --color-bg: #F2F2F8;
+      --color-bg-card: #FFFFFF;
+      --color-bg-card-hover: #EAEAF4;
+      --color-surface: #E8E8F2;
+      --color-border: rgba(0,0,0,0.08);
+      --color-border-hover: rgba(0,0,0,0.16);
+      --color-text: #0D0D1A;
+      --color-text-secondary: #52526A;
+      --color-text-muted: #8A8AA2;
+      --color-accent: #6C5CE7;
+      --color-accent-light: #4E3EC8;
+      --color-accent-glow: rgba(108,92,231,0.10);
+      --color-green: #009E75;
+      --color-green-glow: rgba(0,158,117,0.10);
+    }
+
+    /* ─── Light mode component overrides ─── */
+    [data-theme="light"] .bg-grid {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    }
+
+    [data-theme="light"] .bg-glow { opacity: 0.07; }
+
+    [data-theme="light"] .navbar {
+      background: rgba(242,242,248,0.85);
+      border-bottom-color: rgba(0,0,0,0.08);
+    }
+
+    [data-theme="light"] .browser-frame__bar {
+      background: rgba(0,0,0,0.03);
+      border-bottom-color: rgba(0,0,0,0.06);
+    }
+
+    [data-theme="light"] .browser-frame__url {
+      background: rgba(0,0,0,0.05);
+    }
+
+    [data-theme="light"] .browser-frame__content {
+      background: radial-gradient(ellipse at 50% 0%, rgba(108,92,231,0.05), transparent 60%);
+    }
+
+    [data-theme="light"] .mockup-stat,
+    [data-theme="light"] .mockup-block {
+      background: rgba(0,0,0,0.03);
+    }
+
+    [data-theme="light"] .btn--ghost:hover {
+      background: rgba(0,0,0,0.04);
+    }
+
+    [data-theme="light"] .process__steps::before {
+      background: linear-gradient(90deg, transparent, rgba(108,92,231,0.25), rgba(0,158,117,0.2), transparent);
+    }
+
+    /* ═══════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ═══════════════════════════════════════
+       UTILITIES
+    ═══════════════════════════════════════ */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background: var(--color-accent-glow);
+      border: 1px solid rgba(108,92,231,0.3);
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-accent-light);
+      letter-spacing: 0.03em;
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent-light);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent-light);
+    }
+
+    /* ═══════════════════════════════════════
+       BACKGROUND EFFECTS
+    ═══════════════════════════════════════ */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow--purple {
+      background: var(--color-accent);
+      top: -200px;
+      right: -100px;
+    }
+
+    .bg-glow--green {
+      background: var(--color-green);
+      bottom: -300px;
+      left: -200px;
+    }
+
+    main { position: relative; z-index: 1; }
+
+    /* ═══════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: var(--space-5) 0;
+      background: rgba(10,10,15,0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--color-border);
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .navbar .container {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    /* Logo */
+    .navbar__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .navbar__logo-img {
+      height: 30px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+      /* Logo blanco + gradiente → perfecto sobre dark bg */
+      transition: opacity .2s;
+    }
+    /* Modo claro: el texto blanco no se ve → aplicamos un tinte oscuro al texto
+       manteniendo el gradiente púrpura del ícono */
+    [data-theme="light"] .navbar__logo-img {
+      /* Convierte todo a oscuro para legibilidad en fondo claro */
+      filter: brightness(0) saturate(100%) invert(15%) sepia(15%) saturate(400%) hue-rotate(200deg);
+    }
+    .navbar__logo-img:hover { opacity: .85; }
+    .navbar__logo-fallback {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: none;
+      align-items: center;
+      gap: var(--space-2);
+      white-space: nowrap;
+    }
+    .navbar__logo-fallback span { color: var(--color-accent-light); }
+
+    /* Nav links — centro */
+    .navbar__nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-1);
+      list-style: none;
+    }
+
+    .navbar__nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      border-radius: var(--radius-sm);
+      transition: color 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+    .navbar__nav-link:hover {
+      color: var(--color-text);
+      background: rgba(255,255,255,0.06);
+    }
+    [data-theme="light"] .navbar__nav-link:hover {
+      background: rgba(0,0,0,0.06);
+    }
+    .navbar__nav-link svg {
+      opacity: 0.4;
+      flex-shrink: 0;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .navbar__nav-link:hover svg {
+      opacity: 0.75;
+      transform: translateY(1px);
+    }
+
+    /* Grupo derecho */
+    .navbar__right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    /* Panel btn */
+    .navbar__panel-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: transparent;
+      color: var(--color-text-secondary);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .navbar__panel-btn:hover {
+      color: var(--color-accent-light);
+      border-color: rgba(108,92,231,0.4);
+      background: rgba(108,92,231,0.08);
+    }
+
+    /* CTA */
+    .navbar__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 10px var(--space-5);
+      background: var(--color-accent);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 2px 16px rgba(108,92,231,0.35);
+    }
+    .navbar__cta:hover {
+      background: #5A4BD4;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 24px rgba(108,92,231,0.5);
+    }
+
+    /* Hamburger */
+    .navbar__hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: transparent;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: 8px 7px;
+      transition: border-color 0.2s;
+    }
+    .navbar__hamburger:hover { border-color: var(--color-border-hover); }
+    .navbar__hamburger span {
+      display: block;
+      height: 1.5px;
+      background: var(--color-text-secondary);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+    }
+    .navbar__hamburger span:nth-child(3) { width: 65%; }
+    .navbar__hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .navbar__hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .navbar__hamburger.is-open span:nth-child(3) { width: 100%; transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .navbar__drawer {
+      display: none;
+      position: fixed;
+      top: 65px;
+      left: 0; right: 0;
+      background: var(--color-bg-card);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-4) var(--space-6) var(--space-6);
+      z-index: 99;
+      flex-direction: column;
+      gap: var(--space-1);
+      animation: slideDown 0.25s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .navbar__drawer.is-open { display: flex; }
+
+    .navbar__drawer-link {
+      padding: var(--space-3);
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+    }
+    .navbar__drawer-link:hover { color: var(--color-text); background: rgba(255,255,255,0.05); }
+    [data-theme="light"] .navbar__drawer-link:hover { background: rgba(0,0,0,0.05); }
+
+    .navbar__drawer-sep {
+      height: 1px;
+      background: var(--color-border);
+      margin: var(--space-3) 0;
+    }
+
+    .navbar__drawer-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-accent);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      box-shadow: 0 2px 16px rgba(108,92,231,0.35);
+    }
+
+    /* Responsive breakpoint */
+    @media (max-width: 860px) {
+      .navbar__nav { display: none; }
+      .navbar__cta { display: none; }
+      .navbar__hamburger { display: flex; }
+      .navbar .container {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+      }
+    }
+
+    /* ═══════════════════════════════════════
+       HERO — split layout
+    ═══════════════════════════════════════ */
+    .hero {
+      padding: calc(var(--space-24) + 60px) 0 var(--space-24);
+      overflow: hidden;
+    }
+
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+      align-items: center;
+    }
+
+    /* ── Left content ── */
+    .hero__content { display: flex; flex-direction: column; }
+
+    .hero__label {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-5);
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-8);
+    }
+
+    .hero__title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--color-accent-light), var(--color-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Social proof ── */
+    .hero__proof {
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+      margin-bottom: var(--space-7);
+      flex-wrap: wrap;
+    }
+
+
+    .hero__proof-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--color-border);
+      flex-shrink: 0;
+    }
+
+    .hero__proof-stat strong {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text);
+      display: block;
+      line-height: 1.1;
+    }
+    .hero__proof-stat span {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Description block ── */
+    .hero__desc-block {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-5);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-8);
+      transition: border-color 0.3s;
+    }
+    .hero__desc-block:hover { border-color: var(--color-border-hover); }
+
+    .hero__desc-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-accent-glow);
+      border: 1px solid rgba(108,92,231,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-accent-light);
+    }
+
+    .hero__subtitle {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.65;
+      margin: 0;
+      padding-top: 2px;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      margin-top: 50px;
+    }
+
+    /* Demo badge */
+    .hero__cms-demo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      padding: 9px 16px;
+      background: rgba(108,92,231,0.08);
+      border: 1px solid rgba(108,92,231,0.22);
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-accent-light);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .hero__cms-demo-badge:hover {
+      background: rgba(108,92,231,0.15);
+      border-color: rgba(108,92,231,0.4);
+      transform: translateX(2px);
+    }
+    .hero__cms-demo-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #00D2A0;
+      box-shadow: 0 0 6px rgba(0,210,160,0.8);
+      animation: pulse-dot 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.85); }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-8);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .btn--primary {
+      background: var(--color-accent);
+      color: #fff;
+      box-shadow: 0 4px 24px var(--color-accent-glow);
+    }
+
+    .btn--primary:hover {
+      background: #5A4BD4;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--color-accent-glow);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn--ghost:hover {
+      color: var(--color-text);
+      border-color: var(--color-border-hover);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* ── Right visual ── */
+    .hero__visual {
+      position: relative;
+      padding-left: 50px;
+    }
+
+    .hero__visual-wrap {
+      position: relative;
+    }
+
+    /* Orbitales decorativos */
+    .hero__orbital {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: orbit-spin 25s linear infinite;
+    }
+    .hero__orbital--1 {
+      width: 108%; height: 108%;
+      top: -4%; left: -4%;
+      border: 1px dashed rgba(108,92,231,0.18);
+    }
+    .hero__orbital--2 {
+      width: 128%; height: 128%;
+      top: -14%; left: -14%;
+      border: 1px dashed rgba(0,210,160,0.10);
+      animation-duration: 40s;
+      animation-direction: reverse;
+    }
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Glows detrás del mockup */
+    .hero__glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero__glow--1 {
+      width: 280px; height: 280px;
+      background: var(--color-accent);
+      opacity: 0.14;
+      top: -40px; right: -40px;
+    }
+    .hero__glow--2 {
+      width: 180px; height: 180px;
+      background: var(--color-green);
+      opacity: 0.11;
+      bottom: -20px; left: 10px;
+    }
+
+    /* Punto de brillo orbital */
+    .hero__orbital-dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--color-accent-light);
+      box-shadow: 0 0 12px 3px var(--color-accent-glow);
+      pointer-events: none;
+      top: 0; left: 50%;
+      transform-origin: 0 calc(54% * 1.08);
+      animation: orbit-dot 25s linear infinite;
+    }
+    @keyframes orbit-dot {
+      from { transform: rotate(0deg) translateX(-50%); }
+      to   { transform: rotate(360deg) translateX(-50%); }
+    }
+
+    /* ══════════════════════════════════════════
+       PHONE MOCKUPS 3D — Hero visual
+    ══════════════════════════════════════════ */
+    .hero__visual { position: relative; }
+
+    .phones-scene {
+      position: relative;
+      width: 100%;
+      min-height: 510px;
+      perspective: 900px;
+      perspective-origin: 50% 40%;
+    }
+
+    /* SVG orbit overlay */
+    .orbit-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      overflow: visible;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Phone frame */
+    .phone {
+      position: absolute;
+      border-radius: 38px;
+      background: linear-gradient(158deg, #0F0F1D 0%, #070710 100%);
+      border: 1.5px solid rgba(108,92,231,0.22);
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.80), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .phone::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.02) 30%, transparent 55%);
+      pointer-events: none; z-index: 20;
+    }
+    /* Lado lateral visible del teléfono (efecto de grosor 3D) */
+    .phone::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 8px; bottom: 8px;
+      width: 4px;
+      border-radius: 3px 0 0 3px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(108,92,231,0.15), rgba(0,0,0,0.3));
+      pointer-events: none;
+    }
+    .phone--secondary::before {
+      left: auto; right: -4px;
+      border-radius: 0 3px 3px 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(108,92,231,0.12), rgba(0,0,0,0.25));
+    }
+    .phone__notch {
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 15px; height: 15px;
+      border-radius: 50%;
+      background: #05050E; z-index: 25;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.04);
+    }
+    .phone__screen {
+      padding: 40px 13px 14px;
+      height: 100%;
+      display: flex; flex-direction: column;
+      gap: 8px; overflow: hidden;
+    }
+
+    /* Phone 1 — main (izquierda, PRIMER PLANO) */
+    .phone--main {
+      width: 208px; height: 424px;
+      top: 10px; left: 10px;
+      z-index: 4;
+      filter: drop-shadow(-12px 32px 60px rgba(108,92,231,0.65));
+      animation: float-main 7s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+    /* Phone 2 — secondary (derecha, detrás del phone 1, girado -15° en Y) */
+    .phone--secondary {
+      width: 185px; height: 370px;
+      top: 105px; left: 155px;
+      z-index: 2;
+      filter: drop-shadow(12px 28px 50px rgba(108,92,231,0.32));
+      animation: float-sec 7s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+    @keyframes float-main {
+      0%,100% { transform: rotateZ(-22deg) rotateY(-14deg) translateY(0px); }
+      50%     { transform: rotateZ(-22deg) rotateY(-14deg) translateY(-14px); }
+    }
+    @keyframes float-sec {
+      /* rotateY: 14deg - 15deg = -1deg (girado 15° a la izquierda sobre su eje Y) */
+      0%,100% { transform: rotateZ(20deg) rotateY(-1deg) translateY(-14px); }
+      50%     { transform: rotateZ(20deg) rotateY(-1deg) translateY(0px); }
+    }
+    /* El scene necesita espacio para los teléfonos rotados */
+    .phones-scene { overflow: visible; }
+
+    /* Phone 1 screen elements */
+    .ps-header { font-family: var(--font-display); font-size: 0.57rem; color: rgba(255,255,255,0.42); text-align: center; padding-bottom: 7px; border-bottom: 1px solid rgba(255,255,255,0.06); letter-spacing: 0.03em; }
+    .ps-nav { display: flex; flex-direction: column; gap: 3px; }
+    .ps-nav__item { padding: 5px 8px; border-radius: 7px; font-family: var(--font-display); font-size: 0.52rem; color: rgba(255,255,255,0.32); display: flex; align-items: center; gap: 5px; }
+    .ps-nav__item--active { background: rgba(108,92,231,0.16); color: var(--color-accent-light); }
+    .ps-stat { padding: 7px 9px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; }
+    .ps-stat__lbl { font-size: 0.47rem; color: rgba(255,255,255,0.30); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; }
+    .ps-stat__val { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--color-accent-light); line-height: 1.1; }
+    .ps-stat__val--green { color: var(--color-green); }
+    .ps-chart { flex: 1; background: rgba(108,92,231,0.04); border: 1px solid rgba(108,92,231,0.10); border-radius: 10px; overflow: hidden; position: relative; min-height: 56px; }
+    .ps-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .ps-btn { padding: 9px; background: linear-gradient(90deg, var(--color-accent), #8B5CF6); border-radius: 18px; font-family: var(--font-display); font-size: 0.58rem; font-weight: 600; color: #fff; text-align: center; box-shadow: 0 4px 14px rgba(108,92,231,0.4); }
+
+    /* Phone 2 screen elements */
+    .ps-brand { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 10px; padding: 8px 4px; }
+    .ps-brand__icon { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, var(--color-accent), var(--color-green)); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 8px 24px rgba(108,92,231,0.48); }
+    .ps-brand__title { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: #fff; text-align: center; line-height: 1.25; }
+    .ps-brand__sub { font-size: 0.54rem; color: rgba(255,255,255,0.36); text-align: center; line-height: 1.45; }
+    .ps-brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: 100%; }
+    .ps-mini-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 6px; text-align: center; }
+    .ps-mini-stat strong { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--color-accent-light); display: block; line-height: 1.1; }
+    .ps-mini-stat span { font-size: 0.44rem; color: rgba(255,255,255,0.30); }
+
+    .browser-frame {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow:
+        0 24px 80px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .browser-frame__bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .browser-frame__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .browser-frame__dot:nth-child(1) { background: #FF5F57; }
+    .browser-frame__dot:nth-child(2) { background: #FFBD2E; }
+    .browser-frame__dot:nth-child(3) { background: #28CA41; }
+
+    .browser-frame__url {
+      margin-left: var(--space-3);
+      padding: var(--space-1) var(--space-4);
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .browser-frame__content {
+      padding: var(--space-10) var(--space-8);
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-6);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(108,92,231,0.08), transparent 60%);
+    }
+
+    .mockup-dashboard {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: var(--space-4);
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .mockup-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .mockup-sidebar__item {
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .mockup-sidebar__item--active {
+      background: var(--color-accent-glow);
+      color: var(--color-accent-light);
+    }
+
+    .mockup-main {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+
+    .mockup-stat {
+      padding: var(--space-4);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      text-align: left;
+    }
+
+    .mockup-stat__label {
+      font-size: 0.65rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-1);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mockup-stat__value {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .mockup-stat__value--accent { color: var(--color-accent-light); }
+    .mockup-stat__value--green { color: var(--color-green); }
+
+    .mockup-content-row {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: var(--space-3);
+    }
+
+    .mockup-block {
+      flex: 1;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--color-border);
+    }
+
+    /* ═══════════════════════════════════════
+       FEATURES
+    ═══════════════════════════════════════ */
+    .features {
+      padding: var(--space-24) 0;
+    }
+
+    .features__header {
+      text-align: center;
+      margin-bottom: var(--space-16);
+    }
+
+    .features__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-top: var(--space-4);
+    }
+
+    .features__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+
+    .feature-card {
+      padding: var(--space-8);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--color-border-hover);
+      background: var(--color-bg-card-hover);
+      transform: translateY(-4px);
+    }
+
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: var(--space-5);
+      background: var(--color-accent-glow);
+    }
+
+    .feature-card__icon--green { background: var(--color-green-glow); }
+
+    .feature-card__title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .feature-card__desc {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════
+       HOW IT WORKS
+    ═══════════════════════════════════════ */
+    .process {
+      padding: var(--space-24) 0;
+    }
+
+    .process__header {
+      text-align: center;
+      margin-bottom: var(--space-16);
+    }
+
+    .process__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-top: var(--space-4);
+    }
+
+    .process__steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+      position: relative;
+    }
+
+    .process__steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-accent-glow), var(--color-green-glow), transparent);
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step__number {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto var(--space-5);
+      background: var(--color-bg-card);
+      border: 2px solid var(--color-border);
+      color: var(--color-accent-light);
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s;
+    }
+
+    .step:hover .step__number {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 24px var(--color-accent-glow);
+    }
+
+    .step__title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .step__desc {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ═══════════════════════════════════════
+       WHAT YOU GET
+    ═══════════════════════════════════════ */
+    .deliverables {
+      padding: var(--space-24) 0;
+    }
+
+    .deliverables__header {
+      text-align: center;
+      margin-bottom: var(--space-16);
+    }
+
+    .deliverables__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-top: var(--space-4);
+    }
+
+    .deliverables__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    .deliverable {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-6);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      transition: all 0.3s;
+    }
+
+    .deliverable:hover {
+      border-color: var(--color-border-hover);
+      transform: translateY(-2px);
+    }
+
+    .deliverable__check {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-green-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-green);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .deliverable__title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+
+    .deliverable__desc {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ═══════════════════════════════════════
+       TECH STACK
+    ═══════════════════════════════════════ */
+    .tech {
+      padding: var(--space-20) 0;
+      text-align: center;
+    }
+
+    .tech__title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-8);
+      letter-spacing: 0.03em;
+    }
+
+    .tech__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-10);
+      flex-wrap: wrap;
+    }
+
+    .tech__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--color-text-muted);
+      font-size: 0.75rem;
+      font-family: var(--font-display);
+      transition: color 0.3s;
+    }
+
+    .tech__item:hover { color: var(--color-text-secondary); }
+
+    .tech__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: all 0.3s;
+    }
+
+    .tech__item:hover .tech__icon {
+      border-color: var(--color-border-hover);
+      background: var(--color-bg-card-hover);
+    }
+
+    /* ═══════════════════════════════════════
+       CTA FINAL
+    ═══════════════════════════════════════ */
+    .cta-section {
+      padding: var(--space-24) 0 var(--space-16);
+    }
+
+    .cta-box {
+      position: relative;
+      text-align: center;
+      padding: var(--space-16) var(--space-8);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: var(--radius-xl);
+      padding: 2px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-green), var(--color-accent));
+      background-size: 200% 200%;
+      animation: border-flow 4s ease-in-out infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    @keyframes border-flow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .cta-box__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-4);
+    }
+
+    .cta-box__desc {
+      font-size: 1.05rem;
+      color: var(--color-text-secondary);
+      max-width: 500px;
+      margin: 0 auto var(--space-10);
+      line-height: 1.65;
+    }
+
+    .btn--whatsapp {
+      background: var(--color-whatsapp);
+      color: #fff;
+      padding: var(--space-5) var(--space-10);
+      font-size: 1.1rem;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.25);
+    }
+
+    .btn--whatsapp:hover {
+      background: var(--color-whatsapp-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 40px rgba(37,211,102,0.35);
+    }
+
+    .btn--whatsapp svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .cta-box__note {
+      margin-top: var(--space-5);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    .footer {
+      padding: var(--space-8) 0;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .footer__logo-img {
+      height: 24px; width: auto;
+      opacity: 0.5;
+      transition: opacity .2s;
+      /* Logo blanco sobre footer oscuro */
+    }
+    [data-theme="light"] .footer__logo-img {
+      filter: brightness(0) saturate(100%) invert(15%) sepia(15%) saturate(400%) hue-rotate(200deg);
+    }
+    .footer__logo-img:hover { opacity: 0.8; }
+
+    .footer__text {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      /* Hero: apila columnas en tablet */
+      .hero__inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
+      }
+      .hero__content { text-align: center; align-items: center; }
+      .hero__proof { justify-content: center; }
+      .hero__desc-block { text-align: left; }
+      .hero__actions { justify-content: center; }
+      .hero__orbital--1, .hero__orbital--2 { display: none; }
+      .hero__visual {
+        padding-left: 0;
+        display: flex;
+        justify-content: center;
+      }
+      .phones-scene {
+        width: 360px;
+        max-width: 100%;
+      }
+
+      .features__grid { grid-template-columns: repeat(2, 1fr); }
+      .process__steps { grid-template-columns: repeat(2, 1fr); gap: var(--space-8); }
+      .process__steps::before { display: none; }
+      .mockup-dashboard { grid-template-columns: 1fr; }
+      .mockup-sidebar { flex-direction: row; flex-wrap: wrap; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: calc(var(--space-20) + 20px) 0 var(--space-16); }
+      .hero__title { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+      .features__grid { grid-template-columns: 1fr; }
+      .process__steps { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+      .deliverables__grid { grid-template-columns: 1fr; }
+      .mockup-main { grid-template-columns: 1fr; }
+      .tech__logos { gap: var(--space-6); }
+      .cta-box { padding: var(--space-10) var(--space-6); }
+    }
+
+    /* ═══════════════════════════════════════
+       THEME TOGGLE SWITCH
+    ═══════════════════════════════════════ */
+    .navbar__right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .theme-toggle {
+      position: relative;
+      width: 52px;
+      height: 28px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-hover);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    .theme-toggle__track {
+      position: absolute;
+      inset: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3px;
+      pointer-events: none;
+    }
+
+    .theme-toggle__icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .theme-toggle__icon--sun { color: #F5A623; opacity: 0.4; }
+    .theme-toggle__icon--moon { color: var(--color-accent-light); opacity: 0.9; }
+
+    [data-theme="light"] .theme-toggle__icon--sun { opacity: 0.9; }
+    [data-theme="light"] .theme-toggle__icon--moon { opacity: 0.35; }
+
+    .theme-toggle__thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      box-shadow: 0 2px 8px rgba(108,92,231,0.5);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), background 0.35s ease;
+      pointer-events: none;
+    }
+
+    [data-theme="light"] .theme-toggle__thumb {
+      transform: translateX(24px);
+      box-shadow: 0 2px 8px rgba(108,92,231,0.3);
+    }
+
+    /* ═══════════════════════════════════════
+       ANIMATIONS (scroll reveal)
+    ═══════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+  <!-- Background effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--green"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <div class="container">
+
+      <!-- Logo -->
+      <a href="#" class="navbar__logo" aria-label="Agencia La Radio — inicio">
+        <img
+          src="logo.svg"
+          alt="Agencia La Radio"
+          class="navbar__logo-img"
+          width="160" height="44"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"
+        >
+        <!-- Fallback texto -->
+        <span class="navbar__logo-fallback">La <span>Radio</span></span>
+      </a>
+
+      <!-- Nav links — desktop (centro) -->
+      <ul class="navbar__nav" role="list">
+        <li>
+          <a href="#features" class="navbar__nav-link">
+            Características
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#como-funciona" class="navbar__nav-link">
+            Proceso
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#entregables" class="navbar__nav-link">Entregables</a>
+        </li>
+        <li>
+          <a href="#contacto" class="navbar__nav-link">Contacto</a>
+        </li>
+      </ul>
+
+      <!-- Derecha: toggle + CTA + hamburger -->
+      <div class="navbar__right">
+
+        <!-- Dark / Light toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambiar modo de color">
+          <span class="theme-toggle__track">
+            <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+          <span class="theme-toggle__thumb" aria-hidden="true"></span>
+        </button>
+
+        <!-- Acceder al panel -->
+        <a href="index.html" class="navbar__panel-btn" title="Ir al panel de administración">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Panel CMS
+        </a>
+
+        <!-- CTA desktop -->
+        <a href="#contacto" class="navbar__cta">
+          Solicitar ahora
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <!-- Hamburger mobile -->
+        <button class="navbar__hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="navbar__drawer" id="navDrawer" role="dialog" aria-label="Menú de navegación">
+    <a href="#features" class="navbar__drawer-link">Características</a>
+    <a href="#como-funciona" class="navbar__drawer-link">Proceso</a>
+    <a href="#entregables" class="navbar__drawer-link">Entregables</a>
+    <a href="#contacto" class="navbar__drawer-link">Contacto</a>
+    <div class="navbar__drawer-sep"></div>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font-size:0.875rem;font-weight:600;border:1px solid var(--color-border);color:var(--color-text-secondary);margin-bottom:4px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Acceder al panel CMS
+    </a>
+    <a href="#contacto" class="navbar__drawer-cta">
+      Solicitar ahora
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+  </div>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__inner">
+
+          <!-- ─ Columna izquierda: Contenido ─ -->
+          <div class="hero__content">
+
+            <p class="hero__label">✦ &nbsp;Servicios web profesionales</p>
+
+            <h1 class="hero__title">
+              Tu sitio web<br>
+              <em>auto administrable</em>
+            </h1>
+
+            <!-- Stat pills (sin avatares) -->
+            <div class="hero__proof">
+              <div class="hero__proof-stat">
+                <strong>50+</strong>
+                <span>Proyectos lanzados</span>
+              </div>
+              <div class="hero__proof-divider" aria-hidden="true"></div>
+              <div class="hero__proof-stat">
+                <strong>100%</strong>
+                <span>Clientes satisfechos</span>
+              </div>
+              <div class="hero__proof-divider" aria-hidden="true"></div>
+              <div class="hero__proof-stat">
+                <strong>2 sem</strong>
+                <span>Tiempo de entrega</span>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="hero__actions">
+              <a href="#contacto" class="btn btn--primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Quiero mi sitio web
+              </a>
+              <a href="#como-funciona" class="btn btn--ghost">Ver cómo funciona</a>
+            </div>
+            <!-- Demo CMS badge -->
+            <a href="index.html" class="hero__cms-demo-badge">
+              <span class="hero__cms-demo-dot"></span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Ver panel de administración en vivo
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+
+          </div><!-- /hero__content -->
+
+          <!-- ─ Columna derecha: Phone mockups 3D ─ -->
+          <div class="hero__visual reveal">
+            <div class="phones-scene">
+
+              <!-- Lazo SVG animado (morado, viaja alrededor de los teléfonos) -->
+              <svg class="orbit-svg" viewBox="0 0 480 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <!-- Glow del lazo -->
+                  <filter id="orbitGlow" x="-40%" y="-120%" width="180%" height="340%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+                    <feMerge>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                  <!-- Glow fuerte para los dots -->
+                  <filter id="dotGlow" x="-120%" y="-120%" width="340%" height="340%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+                    <feMerge>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!--
+                  Lazo centrado entre los dos teléfonos:
+                  Phone1 center ≈ (8+104, 18+212) = (112, 230)
+                  Phone2 center ≈ (480-2-89, 158+177) = (389, 335)
+                  Midpoint ≈ (250, 282) → cx=250 cy=280
+                  Tilt: -20deg para acompañar la diagonal de los phones
+                  Extremo izq rotado ≈ (17, 355)  Extremo der ≈ (483, 205)
+                -->
+
+                <!--
+                  Lazo recalculado para phones solapados:
+                  Phone1 centro ≈ (10+104, 10+212) = (114, 222)
+                  Phone2 centro ≈ (155+92, 105+185) = (247, 290)
+                  Midpoint ≈ (180, 256) → cx=182 cy=258
+                  Diagonal angle ≈ -27deg
+                  rx=195, ry=68
+                  Circunferencia ≈ 2π·√((195²+68²)/2) ≈ 920
+                  Extremo izq rotado ≈ (8, 342), Extremo der rotado ≈ (356, 174)
+                -->
+
+                <!-- Lazo base (dim, estático) -->
+                <ellipse cx="182" cy="258" rx="195" ry="68"
+                  stroke="rgba(108,92,231,0.18)" stroke-width="1.5" fill="none"
+                  transform="rotate(-27 182 258)"/>
+
+                <!-- Lazo viajero — glow layer -->
+                <ellipse cx="182" cy="258" rx="195" ry="68"
+                  stroke="rgba(108,92,231,0.65)" stroke-width="9" fill="none"
+                  filter="url(#orbitGlow)"
+                  transform="rotate(-27 182 258)"
+                  stroke-linecap="round"
+                  stroke-dasharray="185 735">
+                  <animate attributeName="stroke-dashoffset"
+                    from="0" to="-920"
+                    dur="5s" repeatCount="indefinite"
+                    calcMode="linear"/>
+                </ellipse>
+
+                <!-- Lazo viajero — línea nítida -->
+                <ellipse cx="182" cy="258" rx="195" ry="68"
+                  stroke="rgba(162,155,254,0.95)" stroke-width="2.5" fill="none"
+                  transform="rotate(-27 182 258)"
+                  stroke-linecap="round"
+                  stroke-dasharray="185 735">
+                  <animate attributeName="stroke-dashoffset"
+                    from="0" to="-920"
+                    dur="5s" repeatCount="indefinite"
+                    calcMode="linear"/>
+                </ellipse>
+
+                <!-- Dot extremo izquierdo-inferior del lazo -->
+                <circle cx="8" cy="342" r="11" fill="rgba(162,155,254,0.20)" filter="url(#dotGlow)"/>
+                <circle cx="8" cy="342" r="7"  fill="#A29BFE"/>
+                <circle cx="8" cy="342" r="7"  fill="#A29BFE" filter="url(#dotGlow)" opacity="0.6"/>
+
+                <!-- Dot extremo derecho-superior del lazo -->
+                <circle cx="356" cy="174" r="9"  fill="rgba(162,155,254,0.20)" filter="url(#dotGlow)"/>
+                <circle cx="356" cy="174" r="5.5" fill="#A29BFE"/>
+                <circle cx="356" cy="174" r="5.5" fill="#A29BFE" filter="url(#dotGlow)" opacity="0.6"/>
+              </svg>
+
+              <!-- Phone 1: CMS Admin Panel -->
+              <div class="phone phone--main" role="img" aria-label="Panel de administración CMS">
+                <div class="phone__notch" aria-hidden="true"></div>
+                <div class="phone__screen">
+                  <div class="ps-header">tu-dominio.com/admin</div>
+                  <div class="ps-nav">
+                    <div class="ps-nav__item ps-nav__item--active">📊&nbsp; Dashboard</div>
+                    <div class="ps-nav__item">📄&nbsp; Páginas</div>
+                    <div class="ps-nav__item">📝&nbsp; Blog</div>
+                    <div class="ps-nav__item">📸&nbsp; Medios</div>
+                  </div>
+                  <div class="ps-stat">
+                    <div class="ps-stat__lbl">Visitas hoy</div>
+                    <div class="ps-stat__val">2,847</div>
+                  </div>
+                  <div class="ps-stat">
+                    <div class="ps-stat__lbl">Uptime</div>
+                    <div class="ps-stat__val ps-stat__val--green">99.9%</div>
+                  </div>
+                  <div class="ps-chart" aria-hidden="true">
+                    <svg viewBox="0 0 182 68" fill="none" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="rgba(108,92,231,0.35)"/>
+                          <stop offset="100%" stop-color="rgba(108,92,231,0)"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M0 52 C18 48 36 28 56 33 C76 38 96 14 118 18 C140 22 162 8 182 12 L182 68 L0 68 Z" fill="url(#chartGrad)"/>
+                      <path d="M0 52 C18 48 36 28 56 33 C76 38 96 14 118 18 C140 22 162 8 182 12" stroke="rgba(108,92,231,0.85)" stroke-width="1.8" stroke-linecap="round"/>
+                      <path d="M0 62 C28 58 60 53 90 48 C122 43 152 46 182 40" stroke="rgba(0,210,160,0.55)" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="4 2"/>
+                    </svg>
+                  </div>
+                  <div class="ps-btn">+ Nueva página</div>
+                </div>
+              </div>
+
+              <!-- Phone 2: Website preview -->
+              <div class="phone phone--secondary" role="img" aria-label="Vista previa del sitio web">
+                <div class="phone__notch" aria-hidden="true"></div>
+                <div class="phone__screen">
+                  <div class="ps-brand">
+                    <div class="ps-brand__icon" aria-hidden="true">🌐</div>
+                    <div class="ps-brand__title">Tu sitio web<br>profesional</div>
+                    <div class="ps-brand__sub">Diseño a medida con panel de gestión incluido</div>
+                    <div class="ps-brand-grid">
+                      <div class="ps-mini-stat">
+                        <strong>50+</strong>
+                        <span>Proyectos</span>
+                      </div>
+                      <div class="ps-mini-stat">
+                        <strong>2 sem</strong>
+                        <span>Entrega</span>
+                      </div>
+                    </div>
+                    <div class="ps-btn">Ver demo →</div>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /phones-scene -->
+          </div><!-- /hero__visual -->
+
+        </div><!-- /hero__inner -->
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="features__header reveal">
+          <span class="section-label">Qué incluye</span>
+          <h2 class="features__title">Todo lo que necesitas<br>en un solo servicio</h2>
+        </div>
+        <div class="features__grid">
+          <div class="feature-card reveal reveal-delay-1">
+            <div class="feature-card__icon">🎨</div>
+            <h3 class="feature-card__title">Diseño a medida</h3>
+            <p class="feature-card__desc">Interfaz diseñada desde cero según la identidad de tu marca. Sin plantillas genéricas, sin compromisos visuales.</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-card__icon feature-card__icon--green">⚡</div>
+            <h3 class="feature-card__title">Rendimiento óptimo</h3>
+            <p class="feature-card__desc">Código limpio, carga rápida y optimizado para SEO. Tu sitio carga en menos de 2 segundos en cualquier dispositivo.</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-3">
+            <div class="feature-card__icon">🖥️</div>
+            <h3 class="feature-card__title">Panel CMS intuitivo</h3>
+            <p class="feature-card__desc">Administra textos, imágenes, páginas y blog sin tocar código. Un panel tan simple que lo dominas en 5 minutos.</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-1">
+            <div class="feature-card__icon feature-card__icon--green">📱</div>
+            <h3 class="feature-card__title">100% Responsive</h3>
+            <p class="feature-card__desc">Experiencia perfecta en móvil, tablet y escritorio. Diseñado mobile-first para donde están tus usuarios.</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-card__icon">🔒</div>
+            <h3 class="feature-card__title">Seguridad incluida</h3>
+            <p class="feature-card__desc">SSL, backups automáticos y actualizaciones de seguridad. Tu sitio protegido desde el día uno.</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-3">
+            <div class="feature-card__icon feature-card__icon--green">📈</div>
+            <h3 class="feature-card__title">Listo para crecer</h3>
+            <p class="feature-card__desc">Arquitectura escalable que permite agregar funcionalidades como e-commerce, formularios avanzados o integraciones.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ HOW IT WORKS ═══ -->
+    <section class="process" id="como-funciona">
+      <div class="container">
+        <div class="process__header reveal">
+          <span class="section-label">Proceso</span>
+          <h2 class="process__title">De la idea a tu sitio en línea</h2>
+        </div>
+        <div class="process__steps">
+          <div class="step reveal reveal-delay-1">
+            <div class="step__number">01</div>
+            <h3 class="step__title">Conversamos</h3>
+            <p class="step__desc">Entendemos tu negocio, objetivos y necesidades específicas para tu sitio.</p>
+          </div>
+          <div class="step reveal reveal-delay-2">
+            <div class="step__number">02</div>
+            <h3 class="step__title">Diseñamos</h3>
+            <p class="step__desc">Creamos el diseño visual y la arquitectura de tu sitio para tu aprobación.</p>
+          </div>
+          <div class="step reveal reveal-delay-3">
+            <div class="step__number">03</div>
+            <h3 class="step__title">Desarrollamos</h3>
+            <p class="step__desc">Construimos tu sitio con código limpio, CMS configurado y todo optimizado.</p>
+          </div>
+          <div class="step reveal reveal-delay-4">
+            <div class="step__number">04</div>
+            <h3 class="step__title">Lanzamos</h3>
+            <p class="step__desc">Tu sitio en producción con capacitación incluida para que manejes el CMS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WHAT YOU GET ═══ -->
+    <section class="deliverables" id="entregables">
+      <div class="container">
+        <div class="deliverables__header reveal">
+          <span class="section-label">Entregables</span>
+          <h2 class="deliverables__title">Lo que recibes al contratar</h2>
+        </div>
+        <div class="deliverables__grid">
+          <div class="deliverable reveal reveal-delay-1">
+            <div class="deliverable__check">✓</div>
+            <div>
+              <div class="deliverable__title">Sitio web completo</div>
+              <div class="deliverable__desc">Hasta 8 secciones/páginas diseñadas y desarrolladas con contenido integrado.</div>
+            </div>
+          </div>
+          <div class="deliverable reveal reveal-delay-2">
+            <div class="deliverable__check">✓</div>
+            <div>
+              <div class="deliverable__title">Panel de administración (CMS)</div>
+              <div class="deliverable__desc">Dashboard para editar textos, subir imágenes, crear entradas de blog y gestionar páginas.</div>
+            </div>
+          </div>
+          <div class="deliverable reveal reveal-delay-3">
+            <div class="deliverable__check">✓</div>
+            <div>
+              <div class="deliverable__title">Dominio + Hosting configurado</div>
+              <div class="deliverable__desc">Asesoría o configuración directa de tu dominio y servidor de alojamiento.</div>
+            </div>
+          </div>
+          <div class="deliverable reveal reveal-delay-2">
+            <div class="deliverable__check">✓</div>
+            <div>
+              <div class="deliverable__title">SEO básico integrado</div>
+              <div class="deliverable__desc">Meta tags, sitemap, velocidad de carga y estructura optimizada para Google.</div>
+            </div>
+          </div>
+          <div class="deliverable reveal reveal-delay-3">
+            <div class="deliverable__check">✓</div>
+            <div>
+              <div class="deliverable__title">Formulario de contacto</div>
+              <div class="deliverable__desc">Integración con WhatsApp o correo para recibir consultas directamente.</div>
+            </div>
+          </div>
+          <div class="deliverable reveal reveal-delay-4">
+            <div class="deliverable__check">✓</div>
+            <div>
+              <div class="deliverable__title">Capacitación + Soporte</div>
+              <div class="deliverable__desc">Video tutorial personalizado del CMS y 30 días de soporte post-lanzamiento.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TECH STACK ═══ -->
+    <section class="tech reveal">
+      <div class="container">
+        <p class="tech__title">Construido con tecnología de primer nivel</p>
+        <div class="tech__logos">
+          <div class="tech__item">
+            <div class="tech__icon">⚛️</div>
+            React / Next.js
+          </div>
+          <div class="tech__item">
+            <div class="tech__icon">🎨</div>
+            Tailwind CSS
+          </div>
+          <div class="tech__item">
+            <div class="tech__icon">📦</div>
+            Node.js
+          </div>
+          <div class="tech__item">
+            <div class="tech__icon">🗄️</div>
+            PostgreSQL
+          </div>
+          <div class="tech__item">
+            <div class="tech__icon">☁️</div>
+            Vercel / AWS
+          </div>
+          <div class="tech__item">
+            <div class="tech__icon">🔐</div>
+            SSL / HTTPS
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA FINAL ═══ -->
+    <section class="cta-section" id="contacto">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2 class="cta-box__title">¿Listo para tener tu<br>sitio web profesional?</h2>
+          <p class="cta-box__desc">Escríbeme por WhatsApp y conversemos sobre tu proyecto. Sin compromiso, respuesta rápida.</p>
+          <a href="https://wa.me/573000000000?text=Hola%2C%20me%20interesa%20el%20servicio%20Web%20%2B%20CMS.%20%C2%BFPodr%C3%ADamos%20conversar%3F" target="_blank" rel="noopener" class="btn btn--whatsapp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar por WhatsApp
+          </a>
+          <p class="cta-box__note">Respondo en menos de 2 horas · Sin compromiso</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <img
+        src="logo.svg"
+        alt="Agencia La Radio"
+        class="footer__logo-img"
+        width="120" height="33"
+        onerror="this.style.display='none'"
+      >
+      <p class="footer__text" id="footer-copy">© 2026 Agencia La Radio · Diseño y desarrollo web profesional</p>
+    </div>
+  </footer>
+
+  <!-- Theme init (antes del paint para evitar flash) -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- Scroll Reveal + Theme Toggle -->
+  <script>
+    /* ── Scroll Reveal ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Mobile Hamburger ── */
+    const hamburger = document.getElementById('navHamburger');
+    const drawer    = document.getElementById('navDrawer');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    });
+
+    // Cierra el drawer al hacer click en cualquier link
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
+
+    // Cierra con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        drawer.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    /* ── Theme Toggle ── */
+    const html = document.documentElement;
+    const btn  = document.getElementById('themeToggle');
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      btn.setAttribute('aria-label', theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+    }
+
+    btn.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
+
+    /* Sincronizar si el sistema cambia de preferencia y no hay preferencia guardada */
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  </script>
+
+  <!-- ══ SYNC CON CMS ══
+       Lee los ajustes guardados en el panel CMS y actualiza
+       el contenido de la landing dinámicamente. -->
+  <script>
+    (function syncCMS() {
+      const raw = localStorage.getItem('cms_settings');
+      if (!raw) return;
+      let cfg;
+      try { cfg = JSON.parse(raw); } catch(e) { return; }
+
+      /* 1. Nombre del sitio → title y footer (el logo es imagen, no se toca) */
+      if (cfg.name) {
+        const footerText = document.getElementById('footer-copy');
+        if (footerText) {
+          footerText.textContent = '© 2026 ' + cfg.name + ' · Diseño y desarrollo web profesional';
+        }
+        document.title = cfg.name + ' — Tu Sitio Web Profesional con Panel de Gestión';
+      }
+
+      /* 2. WhatsApp → actualiza todos los hrefs de wa.me */
+      if (cfg.phone) {
+        const phone = cfg.phone.replace(/[^0-9]/g, '');
+        const waMsg = encodeURIComponent('Hola, me interesa el servicio Web + CMS. ¿Podríamos conversar?');
+        const waHref = 'https://wa.me/' + phone + '?text=' + waMsg;
+        document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+          a.href = waHref;
+        });
+      }
+
+      /* 3. Email → muestra en el footer si existe */
+      if (cfg.email) {
+        const footer = document.querySelector('.footer');
+        if (footer && !footer.querySelector('.footer__email')) {
+          const emailEl = document.createElement('p');
+          emailEl.className = 'footer__email';
+          emailEl.style.cssText = 'font-size:0.8rem;color:var(--color-text-muted);margin-top:4px';
+          emailEl.textContent = cfg.email;
+          footer.querySelector('.container').appendChild(emailEl);
+        }
+      }
+
+      /* 4. Descripción del sitio → meta description */
+      if (cfg.desc) {
+        const meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', cfg.desc);
+      }
+    })();
+  </script>
+
+</body>
+</html>
